@@ -1,0 +1,5 @@
+HOST='asdhajksdgaosd.mdb.yandexcloud.net'
+USERNAME='user'
+PASSWORD='dasdajkdga'
+CA='/usr/local/share/ca-certificates/Yandex/YandexInternalRootCA.crt'
+READONLY=True
