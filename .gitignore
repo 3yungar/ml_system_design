@@ -2,3 +2,5 @@
 .env
 # Виртуальное окружение (смотрите requrements.txt)
 venv/
+# Сертификат для определения контекста Dockerfile
+yandex.crt

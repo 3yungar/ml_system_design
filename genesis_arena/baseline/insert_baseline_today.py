@@ -67,7 +67,7 @@ sensors = [
 # Температура льда
 {
     "db": "genesis_arena", "name": "msw-v3_2", "measurement": "Temperature", 
-    "channel": 0, "phase": 0, "name_in_df": "temp_ice", "mode": "mean"
+    "channel": 0, "phase": 0, "name_in_df": "temp_ice", "mode": "mean" 
 }
 ]
 
@@ -113,7 +113,7 @@ READONLY = os.getenv('SUDO_READONLY')
 
 client = Client(host=HOST, user=USERNAME, password=PASSWORD, ca_certs=CA, secure=True)
 
-# Записть данных в БД
+# Запись данных в БД
 client.execute('use akarmanov_test_db')
 client.insert_dataframe(
     'INSERT INTO "baseline" (time, baseline, compressors, economy, temp_outside, flood) values',
