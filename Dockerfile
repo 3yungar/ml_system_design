@@ -1,20 +1,22 @@
 FROM python:3.10.12-slim
 
+# Create directory for Yandex ca-certificate
 RUN mkdir -p /usr/local/share/ca-certificates/Yandex/   
 COPY yandex.crt /usr/local/share/ca-certificates/Yandex/YandexInternalRootCA.crt
 
+# Install a custom-written library data_wrapper
+# You need to use an environment variable while building docker: --build-arg url_wrapper=$DATA_WRAPPER_URL
+ARG url_wrapper
+ENV DATA_WRAPPER_URL $url_wrapper
+RUN pip install --upgrade --extra-index-url $DATA_WRAPPER_URL "data-wrapper>=2,<3"
 
-RUN pip install \
-            --upgrade \
-            --extra-index-url https://pull_deploy_token:XxqxVD-oQUQtCR-drW36@gitlab.encm.dev/api/v4/projects/67/packages/pypi/simple \
-            "data-wrapper>=2,<3"
-
+# Install libraries
 COPY requirements.txt requirements.txt
 RUN  pip install -r requirements.txt
 
+# Copy full project in visibility area docker
 COPY . .
-# WORKDIR /genesis_arena/baseline
+# Set the working directory
+WORKDIR /genesis_arena/baseline
 
-# CMD ["python", "insert_baseline_today.py"]
-
-CMD ["./update_baseline.sh"]
+CMD ["python", "insert_baseline_today.py"]
